@@ -1,0 +1,49 @@
+Mar 13, 2024 6:00:31 PM reposense.system.LogsManager addFileHandler
+INFO: Log temp folder has been successfully created
+Mar 13, 2024 6:00:31 PM reposense.parser.CsvParser validateHeader
+INFO: Parsed header of CSV file, repo-config.csv, and recognized columns: Ignore Standalone Config,  Repository's Location,  Skip Ignored File Analysis,  Branch,  Shallow Cloning,  File formats,  Ignore Glob List,  Ignore Authors List,  Find Previous Authors,  File Size Limit,  Ignore File Size Limit,  Ignore Commits List
+Mar 13, 2024 6:00:31 PM reposense.parser.CsvParser validateHeader
+INFO: Parsed header of CSV file, author-config.csv, and recognized columns: Author's Emails,  Repository's Location,  Branch,  Author's Git Host ID,  Author's Display Name,  Ignore Glob List,  Author's Git Author Name
+Mar 13, 2024 6:00:31 PM reposense.model.ConfigRunConfiguration getRepoConfigurations
+WARNING: No valid configurations in the author-config.csv.
+reposense.parser.InvalidCsvException: No valid configurations in the author-config.csv.
+	at reposense.parser.CsvParser.parse(CsvParser.java:112)
+	at reposense.model.ConfigRunConfiguration.getRepoConfigurations(ConfigRunConfiguration.java:44)
+	at reposense.RepoSense.main(RepoSense.java:55)
+
+Mar 13, 2024 6:00:31 PM reposense.git.GitConfig getGlobalGitLfsConfig
+WARNING: Could not get global git lfs config
+java.lang.RuntimeException: reposense.system.CommandRunnerProcessException: Error returned from command git config --global --list on path . :
+fatal: unable to read config file '/home/runner/.gitconfig': No such file or directory
+
+	at reposense.system.CommandRunner.runCommand(CommandRunner.java:23)
+	at reposense.git.GitConfig.getGitGlobalConfig(GitConfig.java:86)
+	at reposense.git.GitConfig.getGlobalGitLfsConfig(GitConfig.java:40)
+	at reposense.RepoSense.main(RepoSense.java:78)
+Caused by: reposense.system.CommandRunnerProcessException: Error returned from command git config --global --list on path . :
+fatal: unable to read config file '/home/runner/.gitconfig': No such file or directory
+
+	at reposense.system.CommandRunnerProcess.waitForProcess(CommandRunnerProcess.java:46)
+	at reposense.system.CommandRunner.runCommand(CommandRunner.java:21)
+	... 3 more
+
+Mar 13, 2024 6:00:31 PM reposense.report.RepoCloner spawnCloneProcess
+INFO: Cloning in parallel from https://github.com/reposense/RepoSense.git...
+Mar 13, 2024 6:00:31 PM reposense.report.RepoCloner waitForCloneProcess
+INFO: Waiting for cloning of https://github.com/reposense/RepoSense.git to complete...
+Mar 13, 2024 6:00:36 PM reposense.report.RepoCloner waitForCloneProcess
+INFO: Cloning of https://github.com/reposense/RepoSense.git completed!
+Mar 13, 2024 6:00:36 PM reposense.report.ReportGenerator analyzeRepos
+INFO: [1/1] Analyzing https://github.com/reposense/RepoSense.git (master)...
+Mar 13, 2024 6:00:36 PM reposense.authorship.FileInfoExtractor extractTextFileInfos
+INFO: Extracting relevant file info from https://github.com/reposense/RepoSense.git (master)...
+Mar 13, 2024 6:00:37 PM reposense.commits.CommitInfoExtractor extractCommitInfos
+INFO: Extracting commits info for https://github.com/reposense/RepoSense.git (master)...
+Mar 13, 2024 6:00:37 PM reposense.commits.CommitInfoAnalyzer analyzeCommits
+INFO: Analyzing commits info for https://github.com/reposense/RepoSense.git (master)...
+Mar 13, 2024 6:00:37 PM reposense.report.ReportGenerator analyzeRepo
+INFO: Analysis of https://github.com/reposense/RepoSense.git (master) completed!
+Mar 13, 2024 6:00:37 PM reposense.report.ReportGenerator generateReposReport
+INFO: The report is generated at /home/runner/work/publish-RepoSense/publish-RepoSense/reposense-report
+Mar 13, 2024 6:00:37 PM reposense.RepoSense main
+INFO: Elapsed processing time: 6.10 second(s)
